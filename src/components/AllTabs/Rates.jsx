@@ -9,7 +9,7 @@ const Rates = () =>{
     const [sorting, setSorting] = useState(true);
     const [quantity, setQuantity] = useState("");
     const [currency, setCurrency] = useState(1);
-    const [exchange, setExchange] = useState(false);
+    // const [exchange, setExchange] = useState(false);
     const [timestamp, setTimestamp] = useState({});
     const [times, setTimes] = useState(Date());
 
@@ -28,7 +28,7 @@ const Rates = () =>{
         const {data:{bpi,time}} = await axios.get(URL);
 
         setTimestamp(time);
-        setTimes(Date.parse(timestamp["update"]));
+        
 
         const bpiData = Object.keys(bpi).reduce((acc,currentCode) =>{
         acc[currentCode] = bpi[currentCode].rate_float;
@@ -61,31 +61,24 @@ const Rates = () =>{
 
             unsorted = Object.keys(rates).sort((a,b)=> rates[a] - rates[b])
 
-            for (let i in unsorted){
+            for (var i in unsorted){
                 sorted[unsorted[i]] = rates[unsorted[i]]
             }
 
-
         }
 
-       
         setRates(sorted);
-
 
     }
 
     const exchangeHandler = () =>{
-        setToggleExchange(true);
         console.log(quantity)
-
-
 
     }
 
     const quantityHandler = (e) =>{
         setQuantity(e.target.value);
-        
-
+    
 
     }
 
@@ -182,7 +175,7 @@ const Rates = () =>{
         {exchangeHandler && <p> {rates[currency] * quantity} BTC </p>}
 
         <div className="align-items center"> 
-            <p className="">{timestamp["update"]}</p>  
+           
             <p className=""><h1 className="">Current Time:</h1> {Date(times)}</p> 
         </div>
     </div>
