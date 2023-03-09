@@ -27,7 +27,10 @@ const Rates = () =>{
         const URL = 'https://api.coindesk.com/v1/bpi/currentprice.json';
         const {data:{bpi,time}} = await axios.get(URL);
 
+       
         setTimestamp(time);
+        setTimes(Date.parse(timestamp["update"]));
+
         
 
         const bpiData = Object.keys(bpi).reduce((acc,currentCode) =>{
@@ -52,8 +55,8 @@ const Rates = () =>{
             unsorted = Object.keys(rates).sort((a,b)=> rates[b] - rates[a])
 
 
-            for (var i in unsorted){
-                sorted[unsorted[i]] = rates[unsorted[i]]
+            for (var array in unsorted){
+                sorted[unsorted[array]] = rates[unsorted[array]]
             }
         }
         else if(sorting == false){
@@ -61,8 +64,8 @@ const Rates = () =>{
 
             unsorted = Object.keys(rates).sort((a,b)=> rates[a] - rates[b])
 
-            for (var i in unsorted){
-                sorted[unsorted[i]] = rates[unsorted[i]]
+            for (var array in unsorted){
+                sorted[unsorted[array]] = rates[unsorted[array]]
             }
 
         }
@@ -174,9 +177,9 @@ const Rates = () =>{
         {/* {exchangeHandler && <p>{rates[currency]*quantity</p>} */}
         {exchangeHandler && <p> {rates[currency] * quantity} BTC </p>}
 
-        <div className="align-items center"> 
+        <div className="w-full text-sm text-left text-white-500 dark:text-white-400"> 
            
-            <p className=""><h1 className="">Current Time:</h1> {Date(times)}</p> 
+            <p className="w-full text-sm text-left text-white-500 dark:text-white-400"><h1 className="w-full text-lg text-center text-white-500 dark:text-white-400">Current Time:</h1> {Date(times)}</p> 
         </div>
     </div>
 
