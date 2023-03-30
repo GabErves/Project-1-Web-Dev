@@ -54,8 +54,8 @@ const Rates = () => {
 
       unsorted = Object.keys(rates).sort((a, b) => rates[a] - rates[b]);
 
-      for (var array in unsorted) {
-        sorted[unsorted[array]] = rates[unsorted[array]];
+      for (var array2 in unsorted) {
+        sorted[unsorted[array2]] = rates[unsorted[array2]];
       }
     }
 
