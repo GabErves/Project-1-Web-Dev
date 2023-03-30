@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Rates = () => {
-  const [loading, setLoading] = useState(false);
-  const [bpiData, setBpiData] = useState({});
+  const [loading] = useState(false);
+  const [bpiData] = useState({});
   // const [error, setError] = useState(null);
   const [rates, setRates] = useState({});
   const [sorting, setSorting] = useState(true);
-  const [quantity, setQuantity] = useState("");
+  const [quantity, setQuantity] = useState('');
   const [currency, setCurrency] = useState(1);
   // const [exchange, setExchange] = useState(false);
   const [timestamp, setTimestamp] = useState({});
@@ -18,13 +19,13 @@ const Rates = () => {
     //     data: {bpi}
 
     // } = await axios.get("https://api.coindesk.com/v1/bpi/currentprice.json");
-    const URL = "https://api.coindesk.com/v1/bpi/currentprice.json";
+    const URL = 'https://api.coindesk.com/v1/bpi/currentprice.json';
     const {
       data: { bpi, time },
     } = await axios.get(URL);
 
     setTimestamp(time);
-    setTimes(Date.parse(timestamp["update"]));
+    setTimes(Date.parse(timestamp['update']));
 
     const bpiData = Object.keys(bpi).reduce((acc, currentCode) => {
       acc[currentCode] = bpi[currentCode].rate_float;
@@ -87,14 +88,14 @@ const Rates = () => {
 
       {/* <button value="Submit" class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">Sort</button> */}
 
-      <div class="relative overflow-x-auto">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <div className="relative overflow-x-auto">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Currency
               </th>
-              <th scope="col" class="px-6 py-3">
+              <th scope="col" className="px-6 py-3">
                 Bitcoin
               </th>
             </tr>
@@ -103,18 +104,18 @@ const Rates = () => {
           <tbody className="text-justify">
             {Object.keys(rates).map((current) => {
               return (
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <td
                     scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     key={current}
                   >
-                    {" "}
+                    {' '}
                     1 {current}
                   </td>
                   <td
                     scope="row"
-                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     {rates[current]} BTC
                   </td>
@@ -125,7 +126,7 @@ const Rates = () => {
         </table>
       </div>
 
-      <form class="flex justify-center">
+      <form className="flex justify-center">
         {!loading && bpiData && (
           <>
             {/* <button onClick={fetchAPI}>Fetch rates</button> */}
@@ -143,13 +144,13 @@ const Rates = () => {
         <button
           onClick={sort}
           value="Submit"
-          class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+          className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
           type="button"
         >
           Sort Rates
         </button>
         <div>
-          <div class="mb-3 xl:w-96">
+          <div className="mb-3 xl:w-96">
             <select
               className="select select-primary w-full max-w-xs"
               data-testid="title"
@@ -166,7 +167,7 @@ const Rates = () => {
             </select>
           </div>
         </div>
-        <label for="value">Value: </label>
+        <label htmlFor="value">Value: </label>
         <input
           onChange={quantityHandler}
           value={quantity}
@@ -179,7 +180,7 @@ const Rates = () => {
         <button
           onChange={exchangeHandler}
           value={quantity}
-          class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+          className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
           type="button"
         >
           Exchange
@@ -193,7 +194,7 @@ const Rates = () => {
         <p className="w-full text-sm text-left text-white-500 dark:text-white-400">
           <h1 className="w-full text-lg text-center text-white-500 dark:text-white-400">
             Current Time:
-          </h1>{" "}
+          </h1>{' '}
           {Date(times)}
         </p>
       </div>
